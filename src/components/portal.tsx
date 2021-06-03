@@ -1,32 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSpring, animated, config, to, height } from 'react-spring'
 
 const Portal = ({ onClose, children }) => {
+	const [isReverse, setReverse] = useState(false)
+
 	console.log("createPortal");
+	const commonStyles = {
+		delay: 25,
+		reset: isReverse,
+		reverse: isReverse,
+		onRest: () => {
+			if (isReverse) { onClose(); setReverse(false); }
+		}
+	}
 	const fadeAnim = useSpring({
 		// loop: { reverse: true },
 		config: config.stiff,
 		from: { opacity: 0 },
 		to: { opacity: 0.7 },
-		delay: 25
+		...commonStyles
 	})
 	const animStyle = useSpring({
 		// loop: { reverse: true },
 		config: { mass: 1, tension: 300, friction: 30 },
 		from: { transform: 'scale(0)' },
 		to: { transform: 'scale(1)' },
-		delay: 25
+		...commonStyles
 	})
+
+	useEffect(() => {
+		const listener = document.addEventListener("keyup", (e) => {
+			if (e.key === "Escape") {
+				setReverse(true);
+			}
+		});
+
+		return () => document.removeEventListener("keyup", listener);
+	}, [isReverse]);
 
 	return createPortal(
 		<>
-			<animated.div id="modal-shadow" onClick={() => onClose()} className="fixed h-full w-full left-0 top-0 bg-black opacity-70 z-10" style={{ ...fadeAnim }}>
+			<animated.div id="modal-shadow" onClick={() => setReverse(true)} className="fixed h-full w-full left-0 top-0 bg-black opacity-70 z-10" style={{ ...fadeAnim }}>
 			</animated.div>
 			<animated.div id="modal" className="rounded bg-white fixed z-20 inset-x-4 h-4/5 top-4" style={{ ...animStyle }}>
 				<button
 					onClick={() => {
-						onClose();
+						setReverse(true);
 					}}
 					className="embla__button__close"
 				>
