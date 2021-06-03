@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "Gastby/React Animation Experiments",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Charlie Hwang <charliehwang@gmail.com>",
   "dependencies": {
     "gatsby": "^3.6.2",
     "gatsby-plugin-gatsby-cloud": "^2.6.1",
@@ -17,10 +17,16 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-measure": "^2.5.2",
+    "react-spring": "^9.2.1"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "autoprefixer": "^10.2.6",
+    "gatsby-plugin-postcss": "^4.6.0",
+    "postcss": "^8.3.0",
+    "prettier": "2.2.1",
+    "tailwindcss": "^2.1.4"
   },
   "keywords": [
     "gatsby"
